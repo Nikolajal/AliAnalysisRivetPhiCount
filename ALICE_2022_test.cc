@@ -46,14 +46,14 @@ namespace Rivet {
       void analyze( const Event& event ) {
           
           // Analysis physics selection
-          const Particles &_EventParticles = applyProjection<ALICE::PrimaryParticles>( event, "AliPrimary" );
+          const ALICE::PrimaryParticles &_EventParticles = applyProjection<ALICE::PrimaryParticles>( event, "AliPrimary" );
           
           // Identify the beam ID
           //PdgIdPair _BeamType = beamIds();
           
           std::vector<Particle> kCurrent_Event_Phis;
           // Loop over event particles
-          for ( const Particle& Current_Particle : _EventParticles ) {
+          for ( const Particle& Current_Particle : _EventParticles.Particles() ) {
               // Selecting phi
               if ( Current_Particle.abspid() == 333 ) kCurrent_Event_Phis.push_back( Particle );
           }
@@ -71,7 +71,7 @@ namespace Rivet {
           }
           
           // Histrograms that do no need loop
-          _h1D["ptspec.0333.1D"]->fill( kCurrent_Event_Phis.size() )
+          _h1D["ptspec.0333.1D"]->fill( kCurrent_Event_Phis.size() );
       }
 
 
