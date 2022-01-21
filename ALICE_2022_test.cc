@@ -53,7 +53,7 @@ namespace Rivet {
           
           std::vector<Particle> kCurrent_Event_Phis;
           // Loop over event particles
-          for ( const Particle& Current_Particle : _EventParticles.Particles() ) {
+          for ( const Particle& Current_Particle : _EventParticles.particles() ) {
               // Selecting phi
               if ( Current_Particle.abspid() == 333 ) kCurrent_Event_Phis.push_back( Particle );
           }
