@@ -53,7 +53,7 @@ namespace Rivet {
           
           std::vector<Particle> kCurrent_Event_Phis;
           // Loop over event particles
-          for ( const Particle& Current_Particle : _EventParticles.particles() ) {
+          for ( const Particle& Current_Particle : _EventParticles ) {
               // Selecting phi
               if (Current_Particle.abspid() == 333) kCurrent_Event_Phis.push_back( Particle );
           }
@@ -61,17 +61,17 @@ namespace Rivet {
           // Second loop to work on the phis
           for ( const Particle& iCurrent_Particle : kCurrent_Event_Phis ) {
               //
-              _h1D["ptspec.0333.1D"]->Fill( iCurrent_Particle.pT()/GeV );
+              _h1D["ptspec.0333.1D"]->fill( iCurrent_Particle.pT()/GeV );
               //
               for ( const Particle& jCurrent_Particle : kCurrent_Event_Phis ) {
                   //
-                  _h2D["ptspec.0333.2D"]->Fill( iCurrent_Particle.pT()/GeV, jCurrent_Particle.pT()/GeV );
+                  _h2D["ptspec.0333.2D"]->fill( iCurrent_Particle.pT()/GeV, jCurrent_Particle.pT()/GeV );
                   //
               }
           }
           
           // Histrograms that do no need loop
-          _h1D["ptspec.0333.1D"]->Fill( kCurrent_Event_Phis.size() )
+          _h1D["ptspec.0333.1D"]->fill( kCurrent_Event_Phis.size() )
       }
 
 
