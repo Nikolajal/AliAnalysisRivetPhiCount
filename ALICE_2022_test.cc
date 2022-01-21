@@ -35,7 +35,8 @@ namespace Rivet {
           
           // Book histograms for pT spectra
           book(_h1D["ptspec.0333.1D"],  100,  0.,     30. );
-          book(_h2D["ptspec.0333.2D"],  100,  0.,     30.,    100,    0., 30. );
+          book(_p1D["ptspec.0333.2D"],  100,  0.,     30. );
+          book(_p1D["mptspc.0333.2D"],  100,  0.,     30. );
           
           // Book histograms for production statistics
           book(_h1D["prdprb.0333.XD"],  10,   -0.5,   9.5 );
@@ -59,13 +60,19 @@ namespace Rivet {
           }
           
           // Second loop to work on the phis
+          auto  iPhi    =   0;
           for ( const Particle& iCurrent_Particle : kCurrent_Event_Phis ) {
+              iPhi++;
               //
               _h1D["ptspec.0333.1D"]->fill( iCurrent_Particle.pT()/GeV );
               //
+              auto  jPhi    =   0;
               for ( const Particle& jCurrent_Particle : kCurrent_Event_Phis ) {
+                  jPhi++;
+                  if ( iPhi == jPhi );
                   //
-                  _h2D["ptspec.0333.2D"]->fill( iCurrent_Particle.pT()/GeV, jCurrent_Particle.pT()/GeV );
+                  _p1D["ptspec.0333.2D"]->fill( iCurrent_Particle.pT()/GeV, 1, 0.5 );
+                  _p1D["ptspec.0333.2D"]->fill( iCurrent_Particle.pT()/GeV, jCurrent_Particle.pT()/GeV, 0.5);
                   //
               }
           }
@@ -93,7 +100,8 @@ namespace Rivet {
       
       map<string, Histo1DPtr> _h1D;
       map<string, Histo2DPtr> _h2D;
-      map<string, Scatter2DPtr> _s;
+      map<string, Scatter2DPtr> _s2D;
+      map<string, Profile1DPtr> _p1D;
       
       // Centrality bins used in the analysis
       vector<double> _CentrBins = { 5., 10., 20., 30., 40., 50., 60., 80. };
