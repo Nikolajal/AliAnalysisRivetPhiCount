@@ -46,7 +46,7 @@ namespace Rivet {
       void analyze( const Event& event ) {
           
           // Analysis physics selection
-          const Particles &_EventParticles = apply<ALICE::PrimaryParticles>(event, "AliPrimary");
+          const Particles &_EventParticles = applyProjection<ALICE::PrimaryParticles>( event, "AliPrimary" );
           
           // Identify the beam ID
           //PdgIdPair _BeamType = beamIds();
@@ -55,7 +55,7 @@ namespace Rivet {
           // Loop over event particles
           for ( const Particle& Current_Particle : _EventParticles ) {
               // Selecting phi
-              if (Current_Particle.abspid() == 333) kCurrent_Event_Phis.push_back( Particle );
+              if ( Current_Particle.abspid() == 333 ) kCurrent_Event_Phis.push_back( Particle );
           }
           
           // Second loop to work on the phis
