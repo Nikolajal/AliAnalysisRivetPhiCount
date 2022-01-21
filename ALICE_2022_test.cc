@@ -55,7 +55,7 @@ namespace Rivet {
           // Loop over event particles
           for ( const Particle& Current_Particle : _EventParticles.particles() ) {
               // Selecting phi
-              if ( Current_Particle.abspid() == 333 ) kCurrent_Event_Phis.push_back( Particle );
+              if ( Current_Particle.abspid() == 333 ) kCurrent_Event_Phis.push_back( Current_Particle );
           }
           
           // Second loop to work on the phis
